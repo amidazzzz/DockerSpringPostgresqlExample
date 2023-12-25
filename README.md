@@ -3,7 +3,7 @@
 ## STEPS FOR THIS SPRING BOOT APP
 - Define dependencies in build.gradle
 - Create a Spring Boot Main @SpringBootApplication
-- Create components @Entity / @RestController / @Repository
+- Create components @Entity / @Controller / @Repository
 - Create application.properties
 - Build 
 - Check app using curls 
@@ -17,18 +17,14 @@ docker-compose down <- down docker compose
 
 ## CURLS 
 
-### POST /user/save 
+### POST /users/form
 curl -s -X POST \
-  http://localhost:8080/user/save \
+  http://localhost:8080/user/form \
   -H 'Content-Type: application/json' \
   -d '{"name":"Your Name"}'
 
 
-### GET /user/{id}
+### GET /users/list
 curl -s -X GET \
   http://localhost:8080/user/1 
   
-  
-## Complete explanation
-english: https://experto.dev/en/spring-boot-with-postgresql-and-docker-compose/   
-spanish: https://experto.dev/spring-boot-postgresql-docker-compose/   
