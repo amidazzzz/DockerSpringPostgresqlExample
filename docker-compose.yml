@@ -1,0 +1,39 @@
+version: '3.1'
+
+services:
+  app:
+    container_name: app-springboot-postgresql
+    image: app-springboot-postgresql
+    build: ./
+    ports:
+      - "8080:8080"
+    depends_on:
+      - dbpostgresql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://dbpostgresql:5432/userservicedb
+      SPRING_DATASOURCE_USERNAME: userservicedb
+      SPRING_DATASOURCE_PASSWORD: 123
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_PROFILES_ACTIVE: dev
+    networks:
+      - mynetwork
+
+  dbpostgresql:
+    image: postgres
+    container_name: postgres-container
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: userservicedb
+      POSTGRES_PASSWORD: 123
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+    driver: bridge
+
+volumes:
+  db_data:
